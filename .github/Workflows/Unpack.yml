@@ -1,0 +1,24 @@
+name: Unpack app
+on:
+  push:
+    paths:
+      - velvet-crumb-order-app.zip
+      - .github/workflows/unpack.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  unpack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unzip the app and save it to the repository
+        run: |
+          unzip -q velvet-crumb-order-app.zip
+          cp -r velvet-crumb/. .
+          rm -rf velvet-crumb velvet-crumb-order-app.zip
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add -A
+          git commit -m "Unpack Velvet Crumb app"
+          git push
