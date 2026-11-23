@@ -1,0 +1,21 @@
+name: Create storage volume
+on:
+  push:
+    paths:
+      - .github/workflows/**
+  workflow_dispatch:
+jobs:
+  volume:
+    runs-on: ubuntu-latest
+    env:
+      FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+    steps:
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - name: Create the vc_data volume in London (only once)
+        run: |
+          if flyctl volumes list --app velvet-crumb-orders | grep -q vc_data; then
+            echo "vc_data already exists"
+          else
+            flyctl volumes create vc_data --app velvet-crumb-orders --region lhr --size 1 --yes
+          fi
+          flyctl volumes list --app velvet-crumb-orders
