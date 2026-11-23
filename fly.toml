@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for velvet-crumb-orders-vteifq on 2026-11-23T21:59:03Z
+# fly.toml app configuration file generated for velvet-crumb-orders on 2026-11-23T22:05:29Z
 #
 # See https://docs.fly.io/reference/configuration for information about how to use this file.
 #
 
-app = 'velvet-crumb-orders-vteifq'
+app = 'velvet-crumb-orders'
 primary_region = 'ams'
 
 [build]
